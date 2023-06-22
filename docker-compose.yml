@@ -1,0 +1,17 @@
+version: "3.0"
+services:
+  web:
+    build: ./web
+    volumes:
+      - "./web/www:/var/www/html"
+    ports:
+    - "8000:80"
+  db:
+    image: mysql:8-debian
+    volumes:
+      - "./db/crud.sql:/docker-entrypoint-initdb.d/crud.sql"
+      - "db-data:/var/lib/mysql"
+    environment:
+      - MYSQL_ROOT_PASSWORD=123
+volumes:
+  db-data:
